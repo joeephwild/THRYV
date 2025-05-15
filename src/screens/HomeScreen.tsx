@@ -65,7 +65,7 @@ const HomeScreen: React.FC = () => {
           <Card
             title="Focus Time"
             color="#B8FFED"
-            onPress={() => R.navigate('Productivity')}
+            onPress={() => router.navigate('/productivity')}
           >
             <View className="flex-row items-center justify-between">
               <View>

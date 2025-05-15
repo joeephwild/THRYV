@@ -1,5 +1,5 @@
-import ProductivityScreen from '../../screens/ProductivityScreen'
-import React from 'react'
+import ProductivityScreen from "@/screens/ProductivityScreen"
+
 
 
 const productivity = () => {

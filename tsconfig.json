@@ -7,7 +7,7 @@
       ]
     }
   },
-  "extends": "expo/tsconfig.base",
+  "extends": "expo/tsconfig.base.json",
   "include": [
     "global.d.ts",
     "**/*.ts",
