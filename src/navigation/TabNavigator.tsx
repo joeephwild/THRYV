@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { createBottomTabNavigator } from 'node_modules/@react-navigation/bottom-tabs/lib/typescript/src';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { COLORS } from '../constants/theme';
 
 // Screens
@@ -9,6 +9,7 @@ import InvestScreen from '../screens/InvestScreen';
 import ProductivityScreen from '../screens/ProductivityScreen';
 import LearnScreen from '../screens/LearnScreen';
 import AIChatScreen from '../screens/AIChatScreen';
+import ProgressScreen from '../screens/ProgressScreen'; // <-- Import ProgressScreen
 import { Tabs } from 'expo-router';
 
 const Tab = createBottomTabNavigator();
@@ -30,7 +31,7 @@ const TabIcon: React.FC<TabIconProps> = ({ focused, name, icon }) => {
 
 const TabNavigator: React.FC = () => {
   return (
-    <Tabs.Navigator
+    <Tab.Navigator
       screenOptions={{
         headerShown: false,
         tabBarStyle: styles.tabBar,
@@ -79,6 +80,15 @@ const TabNavigator: React.FC = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <TabIcon focused={focused} name="Assistant" icon="🤖" />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Progress"
+        component={ProgressScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <TabIcon focused={focused} name="Progress" icon="📊" />
           ),
         }}
       />

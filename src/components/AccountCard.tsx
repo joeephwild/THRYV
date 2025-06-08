@@ -1,8 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { LineChart } from 'react-native-svg-charts';
-import Svg, { Path } from 'react-native-svg';
-import * as shape from 'd3-shape';
+import { LineChart } from 'react-native-gifted-charts';
 import { Feather, Ionicons } from '@expo/vector-icons';
 
 interface BalanceCardProps {
@@ -28,24 +26,7 @@ const BalanceCard: React.FC<BalanceCardProps> = ({
   onViewPortfolio,
   activeIndex = 0,
 }) => {
-  // Line chart decorator for the gradient fill
-  const Decorator = ({ x, y, data }: { x: any; y: any; data: number[] }) => {
-    const line = shape.line()
-      .x((d, index) => x(index))
-      .y((d) => y(d))
-      .curve(shape.curveLinear)(data);
-
-    return (
-      <Svg>
-        <Path
-          d={line}
-          stroke="#4ADE80"
-          strokeWidth={2}
-          fill="none"
-        />
-      </Svg>
-    );
-  };
+  const giftedChartData = chartData.map(value => ({ value }));
 
   return (
     <TouchableOpacity
@@ -74,19 +55,25 @@ const BalanceCard: React.FC<BalanceCardProps> = ({
       </View>
 
       {/* Chart area */}
-      <View className="h-40 mt-4">
+      {/* <View className="h-40 mt-4">
         <LineChart
-          style={{ flex: 1 }}
-          data={chartData}
-          contentInset={{ top: 20, bottom: 20 }}
-          svg={{ stroke: '#0A0B0F', strokeWidth: 2 }}
-          curve={shape.curveLinear}
-        >
-          {({ x, y }) => (
-            <Decorator x={x} y={y} data={chartData} />
-          )}
-        </LineChart>
-      </View>
+          data={giftedChartData}
+          color="#4ADE80" // Based on your previous Decorator stroke
+          thickness={2}
+          curved={false} // d3-shape.curveLinear results in straight lines
+          hideDataPoints // To keep the line clean, similar to original
+          spacing={20} // General spacing, replaces spacingTop/Bottom
+          // Hide axes and grid lines for a cleaner look
+          hideYAxisText
+          hideRules
+          yAxisColor="transparent"
+          xAxisColor="transparent"
+          yAxisThickness={0}
+          xAxisThickness={0}
+          initialSpacing={10} // Adjust as needed for start padding
+          endSpacing={10} // Adjust as needed for end padding
+        />
+      </View> */}
 
       {/* Bottom section */}
       <View className="flex-row justify-between items-center mt-3">

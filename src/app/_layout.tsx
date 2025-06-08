@@ -1,3 +1,4 @@
+import 'react-native-get-random-values';
 import "../global.css";
 import React, { useEffect } from "react";
 import { Stack } from "expo-router";
@@ -7,6 +8,7 @@ import { COLORS } from "../constants/theme";
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from '../store';
+import { WalletProvider } from '../wallet/WalletContext';
 import { useFonts, hideSplashScreen } from '../utils/fonts';
 import { View, Text } from 'react-native';
 
@@ -32,23 +34,26 @@ export default function RootLayout() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <SafeAreaProvider>
-          <StatusBar style="dark" />
-          <Stack
-            screenOptions={{
-              headerShown: false,
-              contentStyle: { backgroundColor: COLORS.background },
-              animation: "slide_from_right",
-            }}
-          >
-            <Stack.Screen name="index" />
-            <Stack.Screen name="welcome" />
-            <Stack.Screen name="onboarding" />
-            <Stack.Screen name="goals" />
-            <Stack.Screen name="productivity" />
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          </Stack>
-        </SafeAreaProvider>
+        <WalletProvider>
+          <SafeAreaProvider>
+            <StatusBar style="dark" />
+            <Stack
+              screenOptions={{
+                headerShown: false,
+                contentStyle: { backgroundColor: COLORS.background },
+                animation: "slide_from_right",
+              }}
+            >
+              <Stack.Screen name="index" />
+              <Stack.Screen name="welcome" />
+              <Stack.Screen name="onboarding" />
+              <Stack.Screen name="social-login" />
+              <Stack.Screen name="goals" />
+              <Stack.Screen name="productivity" />
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            </Stack>
+          </SafeAreaProvider>
+        </WalletProvider>
       </PersistGate>
     </Provider>
   );

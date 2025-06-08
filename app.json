@@ -15,6 +15,24 @@
       ]
     ],
     "name": "thryv",
-    "slug": "thryv"
+    "slug": "thryv",
+    "version": "1.0.0",
+    "ios": {
+      "bundleIdentifier": "com.josephweb3.thryv",
+      "buildNumber": "1"
+    },
+    "android": {
+      "package": "com.josephweb3.thryv",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "your-eas-project-id"
+      }
+    }
   }
 }

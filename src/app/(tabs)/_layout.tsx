@@ -79,6 +79,24 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="savings"
+        options={{
+          title: 'Savings',
+          tabBarIcon: ({ focused }) => (
+            <TabIcon
+              focused={focused}
+              iconComponent={
+                <Ionicons
+                  name="server-outline" // Placeholder for savings/vault icon
+                  size={24}
+                  color={focused ? '#FF8A3D' : '#6B7280'}
+                />
+              }
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="learn"
         options={{
           title: 'Learn',
@@ -96,6 +114,25 @@ export default function TabsLayout() {
           ),
         }}
       />
+      {/* New Progress Tab */}
+      <Tabs.Screen
+        name="progress"
+        options={{
+          title: 'Progress',
+          tabBarIcon: ({ focused }) => (
+            <TabIcon
+              focused={focused}
+              iconComponent={
+                <Ionicons
+                  name="flame-outline" // Icon for streaks/progress
+                  size={24}
+                  color={focused ? COLORS.primary : '#6B7280'}
+                />
+              }
+            />
+          ),
+        }}
+      />
       <Tabs.Screen
         name="ai-chat"
         options={{
@@ -103,7 +140,6 @@ export default function TabsLayout() {
           tabBarIcon: ({ focused }) => (
             <TabIcon
               focused={focused}
-              name="Assistant"
               iconComponent={
                 <MaterialCommunityIcons
                   name="robot-outline"

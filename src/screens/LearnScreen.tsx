@@ -74,14 +74,14 @@ const LearnScreen: React.FC = () => {
           <Text className="text-2xl">{course.icon}</Text>
         </View>
         <View className="flex-1">
-          <Text className="text-base font-semibold text-black mb-1">{course.title}</Text>
-          <Text className="text-sm text-gray-600 mb-2" numberOfLines={2}>
+          <Text className="text-[16px] font-cabinet-bold text-black mb-1">{course.title}</Text>
+          <Text className="text-[14px] font-cabinet-medium text-gray-600 mb-2" numberOfLines={2}>
             {course.description}
           </Text>
           <View className="flex-row items-center">
-            <Text className="text-xs text-gray-600 mr-2">{course.duration}</Text>
+            <Text className="text-[14px] font-cabinet-medium text-gray-600 mr-2">{course.duration}</Text>
             <View className="bg-gray-100 px-2 py-0.5 rounded-lg">
-              <Text className="text-xs text-black">{course.level}</Text>
+              <Text className="text-[14px] font-cabinet-medium text-black">{course.level}</Text>
             </View>
           </View>
         </View>
@@ -128,12 +128,12 @@ const LearnScreen: React.FC = () => {
         </View>
 
         <View className="bg-white m-4 rounded-2xl p-4 mt-2 border-b-8 border-l-4 border-r-2 border-t-2 border-[#0A0B0F]">
-          <Text className="text-lg font-bold text-black mb-4">Your Achievements</Text>
+          <Text className="text-[20px] font-cabinet-bold text-black mb-4">Your Achievements</Text>
           <View className="mb-4">
             <View className="h-2 bg-gray-100 rounded mb-2">
               <View className="h-full bg-blue-600 rounded w-[35%]" />
             </View>
-            <Text className="text-sm text-gray-600">3/8 courses completed</Text>
+            <Text className="text-[14px] font-cabinet-medium text-gray-600">3/8 courses completed</Text>
           </View>
           <View className="flex-row justify-between">
             <View className="items-center w-[30%]">

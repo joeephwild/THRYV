@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, ScrollView, SafeAreaView } from 'react-native';
+import { View, Text, ScrollView, SafeAreaView, Pressable } from 'react-native';
 import AccountCard from '../components/AccountCard';
 import ActionButton from '../components/ActionButton';
 import TransactionItem from '../components/TransactionItem';
 import Card from '../components/Card';
 import { useRouter } from 'expo-router';
+import { persistor } from '@/store';
 
 const HomeScreen: React.FC = () => {
     const router = useRouter()
@@ -77,9 +78,9 @@ const HomeScreen: React.FC = () => {
           </Card>
         </View>
 
-        <View className="px-4 mb-2">
+        <Pressable onPress={() => persistor.purge()} className="px-4 mb-2">
           <Text className="text-[24px] font-cabinet-bold text-black">Transactions</Text>
-        </View>
+        </Pressable>
 
         <View className="bg-white rounded-2xl p-4 mx-4 mb-6">
           {transactions.map((transaction) => (
