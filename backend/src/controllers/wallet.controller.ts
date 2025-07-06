@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import { prisma } from '../index';
 import { ApiError, asyncHandler } from '../middleware/error.middleware';
 
+import { WalletService } from '../services/wallet.service';
+
 export const walletController = {
   // Get user wallet
   getWallet: asyncHandler(async (req: Request, res: Response) => {
@@ -302,5 +304,32 @@ export const walletController = {
       wallet: result.updatedSenderWallet,
       transaction: result.senderTransaction,
     });
+  }),
+
+  // Get user's Massa wallet address
+  getMassaWallet: asyncHandler(async (req: Request, res: Response) => {
+    const userId = req.user.id;
+
+    try {
+      // Get user's Massa wallet address
+      const walletAddress = await WalletService.getUserWalletAddress(userId);
+
+      if (!walletAddress) {
+        // If user doesn't have a Massa wallet yet, create one
+        const newWalletAddress = await WalletService.createUserMassaWallet(userId);
+        
+        res.status(200).json({
+          message: 'Massa wallet created successfully',
+          walletAddress: newWalletAddress,
+        });
+      } else {
+        res.status(200).json({
+          walletAddress,
+        });
+      }
+    } catch (error) {
+      console.error('Error getting Massa wallet:', error);
+      throw new ApiError(500, 'Failed to get Massa wallet');
+    }
   }),
 };
