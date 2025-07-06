@@ -6,9 +6,8 @@ interface AuthState {
   isLoading: boolean;
   error: string | null;
   eoaAddress: string | null;
-  aaAddress: string | null;
   rallyAddress: string | null;
-  balance: string | null; // User's AA wallet balance
+  balance: string | null; // User's wallet balance
 }
 
 const initialState: AuthState = {
@@ -17,7 +16,6 @@ const initialState: AuthState = {
   isLoading: false,
   error: null,
   eoaAddress: null,
-  aaAddress: null,
   rallyAddress: null,
   balance: '0',
 };
@@ -38,18 +36,15 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.error = null;
       state.eoaAddress = null;
-      state.aaAddress = null;
       state.rallyAddress = null;
       state.balance = '0';
     },
-    setWalletInfo: (state, action: PayloadAction<{ eoaAddress?: string | null; aaAddress?: string | null; rallyAddress?: string | null }>) => {
+    setWalletInfo: (state, action: PayloadAction<{ eoaAddress?: string | null; rallyAddress?: string | null }>) => {
       if (action.payload.eoaAddress !== undefined) state.eoaAddress = action.payload.eoaAddress;
-      if (action.payload.aaAddress !== undefined) state.aaAddress = action.payload.aaAddress;
       if (action.payload.rallyAddress !== undefined) state.rallyAddress = action.payload.rallyAddress;
     },
     clearWalletInfo: (state) => {
       state.eoaAddress = null;
-      state.aaAddress = null;
       state.rallyAddress = null;
       state.balance = '0';
     },

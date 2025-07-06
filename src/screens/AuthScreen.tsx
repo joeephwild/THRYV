@@ -122,20 +122,17 @@ const AuthScreen: React.FC = () => {
         Alert.alert('Rally Wallet Error', rallyError.message || 'Could not initialize Rally wallet.');
       }
 
-      // Initialize Nero AA Wallet (and EOA signer)
-      let neroEoaAddressSignUp: string | null = null;
-      let neroAaAddressSignUp: string | null = null;
+      // Initialize EOA Wallet
+      let eoaAddressSignUp: string | null = null;
       try {
-        console.log('Creating and Initializing Nero Wallet for new user...');
-        await walletService.createNewWallet(); // Ensures a new EOA is created and stored for Nero
-        const { wallet: eoaNeroWallet, accountAddress: aaNeroAddr } = await walletService.initializeWallet();
-        neroEoaAddressSignUp = eoaNeroWallet.address;
-        neroAaAddressSignUp = aaNeroAddr;
-        console.log('Nero EOA Address (SignUp):', neroEoaAddressSignUp);
-        console.log('Nero AA Address (SignUp):', neroAaAddressSignUp);
-      } catch (neroError: any) {
-        console.error('Nero Wallet Initialization Error (SignUp):', neroError);
-        Alert.alert('Nero Wallet Error', neroError.message || 'Could not initialize Nero AA wallet.');
+        console.log('Creating and Initializing Wallet for new user...');
+        await walletService.createNewWallet(); // Ensures a new EOA is created and stored
+        const { wallet: eoaWallet } = await walletService.initializeWallet();
+        eoaAddressSignUp = eoaWallet.address;
+        console.log('EOA Address (SignUp):', eoaAddressSignUp);
+      } catch (walletError: any) {
+        console.error('Wallet Initialization Error (SignUp):', walletError);
+        Alert.alert('Wallet Error', walletError.message || 'Could not initialize wallet.');
       }
 
       // Update Redux state with Firebase user object
@@ -143,8 +140,7 @@ const AuthScreen: React.FC = () => {
 
       // Update Redux state with wallet addresses
       dispatch(setWalletInfo({
-        eoaAddress: neroEoaAddressSignUp,   // Nero's EOA
-        aaAddress: neroAaAddressSignUp,     // Nero's AA
+        eoaAddress: eoaAddressSignUp,   // EOA wallet address
         rallyAddress: rallyAaAddressSignUp  // Rally's AA address
       }));
 
@@ -184,19 +180,16 @@ const AuthScreen: React.FC = () => {
         Alert.alert('Rally Wallet Error', rallyError.message || 'Could not retrieve Rally wallet.');
       }
 
-      // Initialize Nero AA Wallet (and EOA signer) for existing user
-      let neroEoaAddressSignIn: string | null = null;
-      let neroAaAddressSignIn: string | null = null;
+      // Initialize EOA Wallet for existing user
+      let eoaAddressSignIn: string | null = null;
       try {
-        console.log('Initializing Nero Wallet for existing user...');
-        const { wallet: eoaNeroWallet, accountAddress: aaNeroAddr } = await walletService.initializeWallet();
-        neroEoaAddressSignIn = eoaNeroWallet.address;
-        neroAaAddressSignIn = aaNeroAddr;
-        console.log('Nero EOA Address (SignIn):', neroEoaAddressSignIn);
-        console.log('Nero AA Address (SignIn):', neroAaAddressSignIn);
-      } catch (neroError: any) {
-        console.error('Nero Wallet Initialization Error (SignIn):', neroError);
-        Alert.alert('Nero Wallet Error', neroError.message || 'Could not initialize Nero AA wallet.');
+        console.log('Initializing Wallet for existing user...');
+        const { wallet: eoaWallet } = await walletService.initializeWallet();
+        eoaAddressSignIn = eoaWallet.address;
+        console.log('EOA Address (SignIn):', eoaAddressSignIn);
+      } catch (walletError: any) {
+        console.error('Wallet Initialization Error (SignIn):', walletError);
+        Alert.alert('Wallet Error', walletError.message || 'Could not initialize wallet.');
       }
 
       // Update Redux state with Firebase user object
@@ -204,8 +197,7 @@ const AuthScreen: React.FC = () => {
 
       // Update Redux state with wallet addresses
       dispatch(setWalletInfo({
-        eoaAddress: neroEoaAddressSignIn,   // Nero's EOA
-        aaAddress: neroAaAddressSignIn,     // Nero's AA
+        eoaAddress: eoaAddressSignIn,   // EOA wallet address
         rallyAddress: rallyAaAddressSignIn  // Rally's AA address
       }));
 

@@ -6,7 +6,6 @@ interface UserState {
   email: string | null;
   profileImage: string | null;
   walletAddress: string | null;
-  accountAddress: string | null;
   isLoggedIn: boolean;
   balance: string;
   xpPoints: number;
@@ -22,7 +21,6 @@ const initialState: UserState = {
   email: null,
   profileImage: null,
   walletAddress: null,
-  accountAddress: null,
   isLoggedIn: false,
   balance: '0',
   xpPoints: 0,

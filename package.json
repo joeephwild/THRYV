@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@ethersproject/shims": "^5.8.0",
+    "@massalabs/massa-web3": "^5.2.0",
     "@react-native-async-storage/async-storage": "^2.1.2",
     "@react-native-community/datetimepicker": "8.3.0",
     "@react-native-firebase/app": "^22.2.0",
@@ -44,8 +45,7 @@
     "react-native-web": "^0.20.0",
     "react-redux": "^9.2.0",
     "redux-persist": "^6.0.0",
-    "tailwindcss": "^3.4.0",
-    "userop": "github:nerochain/aa-userop-sdk"
+    "tailwindcss": "^3.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
