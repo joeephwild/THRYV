@@ -51,16 +51,6 @@ export const authController = {
         userId: user.id,
       },
     });
-    
-    // Create Massa wallet for user
-    try {
-      const { WalletService } = await import('../services/wallet.service');
-      await WalletService.createUserMassaWallet(user.id);
-    } catch (error) {
-      console.error('Failed to create Massa wallet:', error);
-      // Continue with registration even if Massa wallet creation fails
-      // We can retry wallet creation later
-    }
 
     // Generate token
     const token = generateToken(user.id);

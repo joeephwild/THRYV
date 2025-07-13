@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@ethersproject/shims": "^5.8.0",
-    "@massalabs/massa-web3": "^5.2.0",
     "@react-native-async-storage/async-storage": "^2.1.2",
     "@react-native-community/datetimepicker": "8.3.0",
     "@react-native-firebase/app": "^22.2.0",
