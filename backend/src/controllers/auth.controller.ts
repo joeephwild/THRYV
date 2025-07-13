@@ -374,4 +374,49 @@ export const authController = {
       token,
     });
   }),
+
+  // Thirdweb authentication
+  thirdwebAuth: asyncHandler(async (req: Request, res: Response) => {
+    const { email, strategy, walletAddress } = req.body;
+
+    // Validate input
+    if (!strategy || !walletAddress) {
+      throw new ApiError(400, 'Strategy and wallet address are required');
+    }
+
+    // Check if user exists with this wallet address
+    let user = await prisma.user.findUnique({
+      where: { walletAddress },
+    });
+
+    if (!user) {
+      // Create new user
+      user = await prisma.user.create({
+        data: {
+          email: email || `${strategy}_${walletAddress.slice(0, 8)}@thryv.app`,
+          walletAddress,
+          isEmailVerified: strategy !== 'guest',
+        },
+      });
+
+      // Create wallet for user
+      await prisma.wallet.create({
+        data: {
+          userId: user.id,
+        },
+      });
+    }
+
+    // Generate token
+    const token = generateToken(user.id);
+
+    // Return user data without password
+    const { password: _, ...userData } = user;
+
+    res.status(200).json({
+      message: 'Authentication successful',
+      user: userData,
+      token,
+    });
+  }),
 };

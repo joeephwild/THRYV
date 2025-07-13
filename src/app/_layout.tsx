@@ -11,6 +11,8 @@ import { store, persistor } from '../store';
 import { WalletProvider } from '../wallet/WalletContext';
 import { useFonts, hideSplashScreen } from '../utils/fonts';
 import { View, Text } from 'react-native';
+import { ThirdwebProvider } from 'thirdweb/react';
+import { client } from '../config/thirdweb';
 
 // This layout sets up the root navigation structure
 export default function RootLayout() {
@@ -32,29 +34,31 @@ export default function RootLayout() {
     );
   }
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <WalletProvider>
-          <SafeAreaProvider>
-            <StatusBar style="dark" />
-            <Stack
-              screenOptions={{
-                headerShown: false,
-                contentStyle: { backgroundColor: COLORS.background },
-                animation: "slide_from_right",
-              }}
-            >
-              <Stack.Screen name="index" />
-              <Stack.Screen name="welcome" />
-              <Stack.Screen name="onboarding" />
-              <Stack.Screen name="social-login" />
-              <Stack.Screen name="goals" />
-              <Stack.Screen name="productivity" />
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            </Stack>
-          </SafeAreaProvider>
-        </WalletProvider>
-      </PersistGate>
-    </Provider>
+    <ThirdwebProvider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <WalletProvider>
+            <SafeAreaProvider>
+              <StatusBar style="dark" />
+              <Stack
+                screenOptions={{
+                  headerShown: false,
+                  contentStyle: { backgroundColor: COLORS.background },
+                  animation: "slide_from_right",
+                }}
+              >
+                <Stack.Screen name="index" />
+                <Stack.Screen name="welcome" />
+                <Stack.Screen name="onboarding" />
+                <Stack.Screen name="social-login" />
+                <Stack.Screen name="goals" />
+                <Stack.Screen name="productivity" />
+                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              </Stack>
+            </SafeAreaProvider>
+          </WalletProvider>
+        </PersistGate>
+      </Provider>
+    </ThirdwebProvider>
   );
 }

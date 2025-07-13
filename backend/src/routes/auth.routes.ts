@@ -15,6 +15,9 @@ router.post('/reset-password', authController.resetPassword);
 router.post('/social/google', authController.googleLogin);
 router.post('/social/apple', authController.appleLogin);
 
+// Thirdweb authentication
+router.post('/thirdweb', authController.thirdwebAuth);
+
 // Protected routes
 router.get('/me', authMiddleware, authController.getCurrentUser);
 router.post('/logout', authMiddleware, authController.logout);
